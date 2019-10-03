@@ -1,0 +1,80 @@
+buildscript {
+    repositories {
+        maven { url "http://sbtnexus.ca.sbrf.ru:8081/nexus/content/repositories/central" }
+        maven { url "http://sbtnexus.ca.sbrf.ru:8081/nexus/service/local/repositories/jcenter/content/" }
+        maven { url "http://sbtnexus.ca.sbrf.ru:8081/nexus/service/local/repositories/central/content/" }
+    }
+    dependencies {
+        classpath("io.swagger:swagger-codegen:${swaggerCodegen}")
+    }
+}
+
+apply plugin: 'base'
+
+import io.swagger.codegen.DefaultGenerator
+import io.swagger.codegen.config.CodegenConfigurator
+
+subprojects {
+    repositories {
+        maven { url "http://sbtnexus.ca.sbrf.ru:8081/nexus/content/repositories/central" }
+        maven { url "http://sbtnexus.ca.sbrf.ru:8081/nexus/service/local/repositories/jcenter/content/" }
+        maven { url "http://sbtnexus.ca.sbrf.ru:8081/nexus/service/local/repositories/central/content/" }
+    }
+
+    apply plugin: 'java'
+    apply plugin: 'maven'
+
+    sourceCompatibility = 1.8
+    targetCompatibility = 1.8
+
+    compileJava.options.fork = true
+    project.buildDir = "${rootProject.buildDir}/${project.name}"
+
+    sourceSets {
+        main {
+            java {
+                srcDir "${serviceServer}/src/main/java"
+            }
+        }
+    }
+
+    task sourcesJar(type: Jar, dependsOn: classes) {
+        classifier = 'sources'
+        from sourceSets.main.allSource
+    }
+
+    artifacts {
+        archives sourcesJar
+    }
+}
+
+project(serviceServer) {
+    dependencies {
+        compile('org.springframework.boot:spring-boot-starter-web:2.0.4.RELEASE')
+        compile('io.springfox:springfox-swagger2:2.9.2')
+    }
+    task generateServer {
+        doLast {
+            def dirName = "${rootDir}/${serviceServer}"
+            file(dirName).list().each {
+                delete "${dirName}/${it}"
+            }
+            def config = new CodegenConfigurator()
+            config.setLang("spring")
+            config.setApiPackage("${rootProject.group}.service.api")
+            // Package to be used for the API interfaces
+            config.setModelPackage("${rootProject.group}.service.model")        // Package to be used for the API models
+            config.setInputSpec("${rootDir}/api/swagger.yml") // The swagger API file
+            config.setOutputDir("${rootDir}/service-server")
+            // The output directory, user-service-contract/build/user-service-server/
+            config.setAdditionalProperties([
+                    'dateLibrary'  : 'java8', // Date library to use
+                    'useTags'      : 'true',  // Use tags for the naming
+                    'interfaceOnly': 'true'   // Generating the Controller API interface and the models only
+            ])
+            new DefaultGenerator().opts(config.toClientOptInput()).generate() // Executing the generation
+        }
+    }
+    compileJava.dependsOn('generateServer')
+}
+

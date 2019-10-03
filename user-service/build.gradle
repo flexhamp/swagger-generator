@@ -1,0 +1,40 @@
+allprojects {
+    apply plugin: 'maven'
+    apply plugin: 'io.spring.dependency-management'
+}
+
+buildscript {
+    ext {
+        springBootVersion = '2.0.4.RELEASE'
+    }
+    repositories {
+        maven { url "http://sbtnexus.ca.sbrf.ru:8081/nexus/content/repositories/central" }
+        maven { url "http://sbtnexus.ca.sbrf.ru:8081/nexus/service/local/repositories/jcenter/content/" }
+        maven { url "http://sbtnexus.ca.sbrf.ru:8081/nexus/service/local/repositories/central/content/" }
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'org.springframework.boot'
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+repositories {
+    mavenLocal()
+    maven { url "http://sbtnexus.ca.sbrf.ru:8081/nexus/content/repositories/central" }
+    maven { url "http://sbtnexus.ca.sbrf.ru:8081/nexus/service/local/repositories/jcenter/content/" }
+    maven { url "http://sbtnexus.ca.sbrf.ru:8081/nexus/service/local/repositories/central/content/" }
+}
+
+dependencies {
+    compile group: 'io.springfox', name: 'springfox-swagger2', version: '2.9.0'
+    compile group: 'io.springfox', name: 'springfox-swagger-ui', version: '2.9.0'
+
+    compile('org.springframework.boot:spring-boot-starter-web')
+    compile project(':service-server') // Generated artifacts
+}
+
