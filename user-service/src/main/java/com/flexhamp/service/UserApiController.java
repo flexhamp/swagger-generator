@@ -12,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.jdbc.core.RowMapperResultSetExtractor;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import javax.validation.Valid;
@@ -43,7 +44,7 @@ public class UserApiController implements SkillApi {
 
     @Override
     public ResponseEntity<List<Skill>> getSkills() {
-        return null;
+        return ResponseEntity.ok(service.findAll());
     }
 
     @Override

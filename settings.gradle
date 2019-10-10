@@ -1,4 +1,5 @@
 rootProject.name = 'swagger-generator'
-include serviceServer
+include 'frontend'
 include 'user-service'
+include serviceServer
 
