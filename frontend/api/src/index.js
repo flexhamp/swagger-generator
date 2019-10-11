@@ -9,12 +9,15 @@ var callBack = function(error, data, response){
 		console.log('ERROR: ' + error);
 	} else {
 		data.map((skill) => {
-			console.log('DATA: ' + skill.name);
+			console.log('DATA: ' + skill.id + ' ' + skill.name);
 		});
 	}
 };
 
+console.log("*** getSkills ***")
 var a = api.getSkills(callBack);
+console.log("*** deleteSkill ***")
+var b = api.deleteSkill(2, callBack);
 
 $('.title').html('Some text');
 

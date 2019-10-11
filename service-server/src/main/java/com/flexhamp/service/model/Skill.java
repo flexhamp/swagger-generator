@@ -13,7 +13,7 @@ import javax.validation.constraints.*;
  * Skill
  */
 @Validated
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2019-10-10T21:24:56.798+07:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2019-10-11T14:32:23.969+07:00")
 
 public class Skill   {
   @JsonProperty("id")
@@ -23,10 +23,10 @@ public class Skill   {
   private String name = null;
 
   @JsonProperty("study")
-  private Float study = null;
+  private Double study = null;
 
   @JsonProperty("progress")
-  private Float progress = null;
+  private Double progress = null;
 
   public Skill id(Long id) {
     this.id = id;
@@ -69,7 +69,7 @@ public class Skill   {
     this.name = name;
   }
 
-  public Skill study(Float study) {
+  public Skill study(Double study) {
     this.study = study;
     return this;
   }
@@ -81,15 +81,15 @@ public class Skill   {
   @ApiModelProperty(value = "")
 
 
-  public Float getStudy() {
+  public Double getStudy() {
     return study;
   }
 
-  public void setStudy(Float study) {
+  public void setStudy(Double study) {
     this.study = study;
   }
 
-  public Skill progress(Float progress) {
+  public Skill progress(Double progress) {
     this.progress = progress;
     return this;
   }
@@ -101,11 +101,11 @@ public class Skill   {
   @ApiModelProperty(value = "")
 
 
-  public Float getProgress() {
+  public Double getProgress() {
     return progress;
   }
 
-  public void setProgress(Float progress) {
+  public void setProgress(Double progress) {
     this.progress = progress;
   }
 

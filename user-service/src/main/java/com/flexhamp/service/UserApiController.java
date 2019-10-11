@@ -13,6 +13,7 @@ import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.jdbc.core.RowMapperResultSetExtractor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import javax.validation.Valid;
@@ -32,14 +33,14 @@ public class UserApiController implements SkillApi {
     }
 
     @Override
-    public ResponseEntity<List<Skill>> deleteSkill(Long skillId) {
-        System.out.println(skillId);
-        return null;
+    public ResponseEntity<List<Skill>> deleteSkill(@PathVariable("skillId") Long skillId) {
+        service.delete(skillId);
+        return ResponseEntity.ok(service.findAll());
     }
 
     @Override
-    public ResponseEntity<Skill> getSkillById(Long skillId) {
-        return null;
+    public ResponseEntity<Skill> getSkillById(@PathVariable("skillId") Long skillId) {
+        return ResponseEntity.ok(service.get(skillId));
     }
 
     @Override
@@ -48,40 +49,8 @@ public class UserApiController implements SkillApi {
     }
 
     @Override
-    public ResponseEntity<List<Skill>> updateSkill(@Valid Skill name) {
-        return null;
+    public ResponseEntity<List<Skill>> updateSkill(@Valid Skill skill) {
+        service.update(skill);
+        return ResponseEntity.ok(service.findAll());
     }
-
-    //    @Override
-//    public ResponseEntity<ListSkillResponse> updateSkill(@Valid Skill name) {
-//        return null;
-//    }
-    //    @Override
-//    public ResponseEntity<ListUserResponse> createUser(UserCreateRequest user) {
-//        ListUserResponse userResponse = new ListUserResponse();
-//
-//        System.out.println("-----------------------------------------");
-//        System.out.println(user);
-//
-//        for (int i = 0; i < 10; i++) {
-//            UserResponse response = new UserResponse();
-//            response.setId(i);
-//            response.setName("Test " + i);
-//            userResponse.add(response);
-//        }
-//        return  ResponseEntity.ok(userResponse);
-//    }
-//
-//    @Override
-//    public ResponseEntity<ListUserResponse> getUsers() {
-//        ListUserResponse userResponse = new ListUserResponse();
-//
-//        for (int i = 0; i < 10; i++) {
-//            UserResponse response = new UserResponse();
-//            response.setId(i);
-//            response.setName("Test " + i);
-//            userResponse.add(response);
-//        }
-//        return  ResponseEntity.ok(userResponse);
-//    }
 }

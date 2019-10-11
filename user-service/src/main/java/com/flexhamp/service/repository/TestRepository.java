@@ -13,9 +13,9 @@ public interface TestRepository {
 
     void update(Skill skill) throws SQLException;
 
-    void delete(long skillId) throws SQLException;
+    void delete(Long id) throws SQLException;
 
     List<Skill> findAll() throws SQLException;
 
-    Skill get(long id);
+    Skill get(Long id);
 }

@@ -42,7 +42,7 @@ project(serviceServer) {
         compile group: 'org.springframework.boot', name: 'spring-boot-starter-web', version: springBootVersion
         compile group: 'io.springfox', name: 'springfox-swagger2', version: springfoxSwagger
     }
-    if (project.hasProperty('generate')) {
+    if (project.hasProperty('generate') || !project.hasProperty('dev')) {
         task generateServer {
             doLast {
                 println "********** Swagger generate Server **************"
@@ -53,18 +53,15 @@ project(serviceServer) {
                 def config = new CodegenConfigurator()
                 config.setLang("spring")
                 config.setApiPackage("${rootProject.group}.service.api")
-                // Package to be used for the API interfaces
                 config.setModelPackage("${rootProject.group}.service.model")
-                // Package to be used for the API models
-                config.setInputSpec("${rootDir}/api/swagger.yml") // The swagger API file
+                config.setInputSpec("${rootDir}/api/swagger.yml")
                 config.setOutputDir(dirName)
-                // The output directory, user-service-contract/build/user-service-server/
                 config.setAdditionalProperties([
-                        'dateLibrary'  : 'java8', // Date library to use
-                        'useTags'      : 'true',  // Use tags for the naming
-                        'interfaceOnly': 'true'   // Generating the Controller API interface and the models only
+                        'dateLibrary'  : 'java8',
+                        'useTags'      : 'true',
+                        'interfaceOnly': 'true'
                 ])
-                new DefaultGenerator().opts(config.toClientOptInput()).generate() // Executing the generation
+                new DefaultGenerator().opts(config.toClientOptInput()).generate()
             }
         }
         task generateClient {
@@ -77,21 +74,29 @@ project(serviceServer) {
                 def configFront = new CodegenConfigurator()
                 configFront.setLang("javascript")
                 configFront.setApiPackage("")
-                // Package to be used for the API interfaces
                 configFront.setModelPackage("")
-                // Package to be used for the API models
-                configFront.setInputSpec("${rootDir}/api/swagger.yml") // The swagger API file
+                configFront.setInputSpec("${rootDir}/api/swagger.yml")
                 configFront.setOutputDir(dirName)
-                // The output directory, user-service-contract/build/user-service-server/
                 configFront.setAdditionalProperties([
-                        'projectName'  : 'codegen-skills-api', // Date library to use
+                        'projectName'  : 'codegen-skills-api',
                         'projectDescription': 'This project just test swagger',
                         'projectVersion': version
                 ])
-                new DefaultGenerator().opts(configFront.toClientOptInput()).generate() // Executing the generation
+                new DefaultGenerator().opts(configFront.toClientOptInput()).generate()
+                copy {
+                    println "********** Copy project.js ${dirName} **************"
+                    from file("${rootDir}/frontend/package.json")
+                    from file("${rootDir}/frontend/package-lock.json")
+                    into file(dirName)
+                }
+                exec {
+                    println "********** NPM Version **************"
+                    workingDir "${rootDir}/frontend/api"
+                    commandLine 'npm.cmd', 'run', 'build'
+                }
             }
         }
-        compileJava.dependsOn('generateServer')
-        compileJava.dependsOn('generateClient')
+        compileJava.dependsOn generateServer
+        compileJava.dependsOn generateClient
     }
 }

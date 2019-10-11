@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "webpack",
-    "postinstall": "cd ../generate && npm link && cd ../api && npm link codegen-skills-api"
+    "prebuild": "cd ../generate && npm link && cd ../api && npm link codegen-skills-api",
+    "build": "webpack"
   },
   "author": "",
   "license": "ISC",

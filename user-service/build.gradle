@@ -26,3 +26,16 @@ dependencies {
     compile group: 'io.springfox', name: 'springfox-swagger-ui', version: springfoxSwagger
     compile project(':service-server')
 }
+
+if(project.hasProperty('dev')) {
+    task buildApi {
+        doFirst {
+            exec {
+                println "********** NPM Version **************"
+                workingDir "${rootDir}/frontend/api"
+                commandLine 'npm.cmd', 'run', 'build'
+            }
+        }
+    }
+}
+build.dependsOn buildApi

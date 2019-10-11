@@ -28,7 +28,7 @@ import javax.validation.constraints.*;
 import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2019-10-10T21:24:56.798+07:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2019-10-11T14:32:23.969+07:00")
 
 @Api(value = "Skill", description = "the Skill API")
 public interface SkillApi {
@@ -59,7 +59,7 @@ public interface SkillApi {
         if(getObjectMapper().isPresent() && getAcceptHeader().isPresent()) {
             if (getAcceptHeader().get().contains("application/json")) {
                 try {
-                    return new ResponseEntity<>(getObjectMapper().get().readValue("[ {  \"study\" : 6.0274563,  \"name\" : \"Java\",  \"progress\" : 1.4658129,  \"id\" : 0}, {  \"study\" : 6.0274563,  \"name\" : \"Java\",  \"progress\" : 1.4658129,  \"id\" : 0} ]", List.class), HttpStatus.NOT_IMPLEMENTED);
+                    return new ResponseEntity<>(getObjectMapper().get().readValue("[ {  \"study\" : 6.027456183070403,  \"name\" : \"Java\",  \"progress\" : 1.4658129805029452,  \"id\" : 0}, {  \"study\" : 6.027456183070403,  \"name\" : \"Java\",  \"progress\" : 1.4658129805029452,  \"id\" : 0} ]", List.class), HttpStatus.NOT_IMPLEMENTED);
                 } catch (IOException e) {
                     log.error("Couldn't serialize response for content type application/json", e);
                     return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
@@ -77,14 +77,14 @@ public interface SkillApi {
         @ApiResponse(code = 200, message = "", response = Skill.class, responseContainer = "List"),
         @ApiResponse(code = 400, message = "Invalid ID supplied"),
         @ApiResponse(code = 404, message = "Skill not found") })
-    @RequestMapping(value = "/skill",
+    @RequestMapping(value = "/skill/{skillId}",
         produces = { "application/json" }, 
         method = RequestMethod.DELETE)
     default ResponseEntity<List<Skill>> deleteSkill(@ApiParam(value = "Skill id to delete",required=true) @PathVariable("skillId") Long skillId) {
         if(getObjectMapper().isPresent() && getAcceptHeader().isPresent()) {
             if (getAcceptHeader().get().contains("application/json")) {
                 try {
-                    return new ResponseEntity<>(getObjectMapper().get().readValue("[ {  \"study\" : 6.0274563,  \"name\" : \"Java\",  \"progress\" : 1.4658129,  \"id\" : 0}, {  \"study\" : 6.0274563,  \"name\" : \"Java\",  \"progress\" : 1.4658129,  \"id\" : 0} ]", List.class), HttpStatus.NOT_IMPLEMENTED);
+                    return new ResponseEntity<>(getObjectMapper().get().readValue("[ {  \"study\" : 6.027456183070403,  \"name\" : \"Java\",  \"progress\" : 1.4658129805029452,  \"id\" : 0}, {  \"study\" : 6.027456183070403,  \"name\" : \"Java\",  \"progress\" : 1.4658129805029452,  \"id\" : 0} ]", List.class), HttpStatus.NOT_IMPLEMENTED);
                 } catch (IOException e) {
                     log.error("Couldn't serialize response for content type application/json", e);
                     return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
@@ -109,7 +109,7 @@ public interface SkillApi {
         if(getObjectMapper().isPresent() && getAcceptHeader().isPresent()) {
             if (getAcceptHeader().get().contains("application/json")) {
                 try {
-                    return new ResponseEntity<>(getObjectMapper().get().readValue("{  \"study\" : 6.0274563,  \"name\" : \"Java\",  \"progress\" : 1.4658129,  \"id\" : 0}", Skill.class), HttpStatus.NOT_IMPLEMENTED);
+                    return new ResponseEntity<>(getObjectMapper().get().readValue("{  \"study\" : 6.027456183070403,  \"name\" : \"Java\",  \"progress\" : 1.4658129805029452,  \"id\" : 0}", Skill.class), HttpStatus.NOT_IMPLEMENTED);
                 } catch (IOException e) {
                     log.error("Couldn't serialize response for content type application/json", e);
                     return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
@@ -133,7 +133,7 @@ public interface SkillApi {
         if(getObjectMapper().isPresent() && getAcceptHeader().isPresent()) {
             if (getAcceptHeader().get().contains("application/json")) {
                 try {
-                    return new ResponseEntity<>(getObjectMapper().get().readValue("[ {  \"study\" : 6.0274563,  \"name\" : \"Java\",  \"progress\" : 1.4658129,  \"id\" : 0}, {  \"study\" : 6.0274563,  \"name\" : \"Java\",  \"progress\" : 1.4658129,  \"id\" : 0} ]", List.class), HttpStatus.NOT_IMPLEMENTED);
+                    return new ResponseEntity<>(getObjectMapper().get().readValue("[ {  \"study\" : 6.027456183070403,  \"name\" : \"Java\",  \"progress\" : 1.4658129805029452,  \"id\" : 0}, {  \"study\" : 6.027456183070403,  \"name\" : \"Java\",  \"progress\" : 1.4658129805029452,  \"id\" : 0} ]", List.class), HttpStatus.NOT_IMPLEMENTED);
                 } catch (IOException e) {
                     log.error("Couldn't serialize response for content type application/json", e);
                     return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
@@ -160,7 +160,7 @@ public interface SkillApi {
         if(getObjectMapper().isPresent() && getAcceptHeader().isPresent()) {
             if (getAcceptHeader().get().contains("application/json")) {
                 try {
-                    return new ResponseEntity<>(getObjectMapper().get().readValue("[ {  \"study\" : 6.0274563,  \"name\" : \"Java\",  \"progress\" : 1.4658129,  \"id\" : 0}, {  \"study\" : 6.0274563,  \"name\" : \"Java\",  \"progress\" : 1.4658129,  \"id\" : 0} ]", List.class), HttpStatus.NOT_IMPLEMENTED);
+                    return new ResponseEntity<>(getObjectMapper().get().readValue("[ {  \"study\" : 6.027456183070403,  \"name\" : \"Java\",  \"progress\" : 1.4658129805029452,  \"id\" : 0}, {  \"study\" : 6.027456183070403,  \"name\" : \"Java\",  \"progress\" : 1.4658129805029452,  \"id\" : 0} ]", List.class), HttpStatus.NOT_IMPLEMENTED);
                 } catch (IOException e) {
                     log.error("Couldn't serialize response for content type application/json", e);
                     return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);

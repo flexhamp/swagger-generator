@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Service
 public class TestService implements TestRepository {
@@ -20,40 +21,45 @@ public class TestService implements TestRepository {
     private final ResultSetExtractor<List<Skill>> entitySkillRowMapper;
 
 
-
     public TestService() {
         entitySkillRowMapper = new RowMapperResultSetExtractor<>((rs, rowNum) -> {
             Skill skill = new Skill();
             skill.setId(rs.getLong("ID"));
             skill.setName(rs.getString("NAME"));
+            skill.setStudy(rs.getDouble("STUDY"));
+            skill.setProgress(rs.getDouble("PROGRESS"));
             return skill;
         });
     }
 
     private void execute(String query) {
         try (Connection connection = DriverManager.getConnection(URL, USER, PASSWORD); Statement statement = connection.createStatement()) {
-            int a = statement.executeUpdate(query);
-            System.out.println(a);
+            statement.execute(query);
         } catch (SQLException ignored) {
         }
     }
 
     @Override
     public void create(Skill skill) {
-        System.out.println("--->" + skill.getName());
-        String query = "INSERT INTO " + SKILL_DB + " VALUES (default, '"+ skill.getName() + "')";
+        Double study = skill.getStudy() != null ? skill.getStudy() : 0.0;
+        Double progress = skill.getProgress() != null ? skill.getProgress() : 0.0;
+        String query = "INSERT INTO " + SKILL_DB + " VALUES (default, '" + skill.getName() + "','" + study + "','" + progress + "')";
         execute(query);
     }
 
     @Override
     public void update(Skill skill) {
-        String query = "";
+        Long id = skill.getId();
+        String name = skill.getName();
+        Double study = skill.getStudy() != null ? skill.getStudy() : 0.0;
+        Double progress = skill.getProgress() != null ? skill.getProgress() : 0.0;
+        String query = "UPDATE " + SKILL_DB + " SET NAME=" + name + ", STUDY=" + study + ", PROGRESS=" + progress + " WHERE ID=" + id;
         execute(query);
     }
 
     @Override
-    public void delete(long skillId) {
-        String query = "";
+    public void delete(Long id) {
+        String query = "DELETE FROM " + SKILL_DB + " WHERE ID=" + id;
         execute(query);
     }
 
@@ -63,8 +69,7 @@ public class TestService implements TestRepository {
         String query = "SELECT * FROM " + SKILL_DB;
         try (Connection connection = DriverManager.getConnection(URL, USER, PASSWORD); Statement statement = connection.createStatement()) {
             ResultSet resultSet = statement.executeQuery(query);
-            skills.addAll(entitySkillRowMapper.extractData(resultSet));
-            System.out.println("---------------------------");
+            skills.addAll(Objects.requireNonNull(entitySkillRowMapper.extractData(resultSet)));
         } catch (SQLException ignored) {
             System.out.println(ignored.getMessage());
         }
@@ -72,13 +77,14 @@ public class TestService implements TestRepository {
     }
 
     @Override
-    public Skill get(long id) {
-        String query = "SELECT * FROME skill_tb WHERE ID=" + id;
+    public Skill get(Long id) {
+        String query = "SELECT * FROM " + SKILL_DB + " WHERE ID=" + id;
+        Skill skill = new Skill();
         try (Connection connection = DriverManager.getConnection(URL, USER, PASSWORD); Statement statement = connection.createStatement()) {
             ResultSet resultSet = statement.executeQuery(query);
-            System.out.println(resultSet);
+            skill = Objects.requireNonNull(entitySkillRowMapper.extractData(resultSet)).get(0);
         } catch (SQLException ignored) {
         }
-        return null;
+        return skill;
     }
 }
