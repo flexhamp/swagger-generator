@@ -49,7 +49,8 @@ public class UserApiController implements SkillApi {
     }
 
     @Override
-    public ResponseEntity<List<Skill>> updateSkill(@Valid Skill skill) {
+    public ResponseEntity<List<Skill>> updateSkill(@Valid @RequestBody Skill skill) {
+        System.out.println(skill.toString());
         service.update(skill);
         return ResponseEntity.ok(service.findAll());
     }

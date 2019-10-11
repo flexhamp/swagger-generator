@@ -53,7 +53,12 @@ public class TestService implements TestRepository {
         String name = skill.getName();
         Double study = skill.getStudy() != null ? skill.getStudy() : 0.0;
         Double progress = skill.getProgress() != null ? skill.getProgress() : 0.0;
-        String query = "UPDATE " + SKILL_DB + " SET NAME=" + name + ", STUDY=" + study + ", PROGRESS=" + progress + " WHERE ID=" + id;
+
+
+        System.out.println("SKILL FOR UPDATE: " + id + " " + name + " " + study + " " + progress);
+
+        String query = "UPDATE " + SKILL_DB + " SET NAME='" + name + "', STUDY=" + study + ", PROGRESS=" + progress + " WHERE ID=" + id;
+        System.out.println("QUERY: " + query);
         execute(query);
     }
 
