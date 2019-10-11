@@ -90,9 +90,12 @@ project(serviceServer) {
                     into file(dirName)
                 }
                 exec {
-                    println "********** NPM build-prod **************"
                     workingDir "${rootDir}/frontend/api"
                     commandLine 'npm.cmd', 'install'
+                }
+                exec {
+                    println "********** NPM build-prod **************"
+                    workingDir "${rootDir}/frontend/api"
                     commandLine 'npm.cmd', 'run', 'build-prod'
                 }
             }

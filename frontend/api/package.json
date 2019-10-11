@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "preinstall": "npm run prebuild",
+    "postinstall": "npm run prebuild",
     "prebuild": "cd ../generate && npm link && cd ../api && npm link codegen-skills-api",
     "build-dev": "webpack --mode development",
     "build-prod": "webpack --mode production"
