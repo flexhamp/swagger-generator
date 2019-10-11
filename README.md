@@ -4,9 +4,9 @@ Description text
 
 ## Build
 ###### For prodaction
-*  `gradle build -Pprod`
+*  `gradle clean build -Pprod` or `gradle clean build`
 ###### For develop
-* Build `gradle clean build -Pdev`
+* Build partial `gradle clean build -Pdev`
 * Build and run ` gradle clean build -Pdev && gradle bootRun`
 * Swagger codegenerate server and client: `gradle clean build -Pgenerate`
 ##H2
@@ -19,3 +19,7 @@ Description text
 
 ##### For Test requests
 * Please download programm "Postman"
+
+
+##### Swagger
+http://localhost:8080/swagger-ui.html#/

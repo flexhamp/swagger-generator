@@ -42,7 +42,7 @@ project(serviceServer) {
         compile group: 'org.springframework.boot', name: 'spring-boot-starter-web', version: springBootVersion
         compile group: 'io.springfox', name: 'springfox-swagger2', version: springfoxSwagger
     }
-    if (project.hasProperty('generate') || project.hasProperty('prod')) {
+    if (project.hasProperty('generate') || project.hasProperty('prod') || !project.hasProperty('dev')) {
         task generateServer {
             doLast {
                 println "********** Swagger generate Server **************"

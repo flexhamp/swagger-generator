@@ -40,15 +40,11 @@ var c = api.createSkill(skilCreate, callBackArr);
 var skill = {
     'skill': new SwaggerApi.Skill.constructFromObject({"name": "Javascript", "study": "530", "progress": "263.5"})
 }
+var skillUpdate = {
+    'skill': new SwaggerApi.Skill.constructFromObject({"id": "1", "name": "Javascript", "study": "530", "progress": "263.5"})
+}
 api.createSkill(skill, callBackArr);
 api.getSkillById(3, callBackSing)
-
-console.log(skill)
-
-// ------ конец пример -------------------------
-
-//$('.title').html('Some text');
-
-//console.log(avg(1, 4, 8));
+api.updateSkill(skillUpdate, callBackArr)
 
 

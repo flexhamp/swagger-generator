@@ -65,7 +65,7 @@ paths:
       parameters:
       - in: "body"
         name: "skill"
-        required: true
+        description: "The skill data"
         schema:
           $ref: "#/definitions/Skill"
       responses:
