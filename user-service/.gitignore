@@ -19,3 +19,4 @@ git.properties
 *.lock
 out/
 .gradle/
+**/static/js

@@ -19,4 +19,4 @@ git.properties
 *.lock
 out/
 .gradle/
-*/service-server/
+*/service-server

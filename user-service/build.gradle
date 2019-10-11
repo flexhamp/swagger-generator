@@ -31,11 +31,12 @@ if(project.hasProperty('dev')) {
     task buildApi {
         doFirst {
             exec {
-                println "********** NPM Version **************"
+                println "********** NPM build-develop **************"
                 workingDir "${rootDir}/frontend/api"
-                commandLine 'npm.cmd', 'run', 'build'
+                commandLine 'npm.cmd', 'install'
+                commandLine 'npm.cmd', 'run', 'build-dev'
             }
         }
     }
+    build.dependsOn buildApi
 }
-build.dependsOn buildApi

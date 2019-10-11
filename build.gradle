@@ -42,7 +42,7 @@ project(serviceServer) {
         compile group: 'org.springframework.boot', name: 'spring-boot-starter-web', version: springBootVersion
         compile group: 'io.springfox', name: 'springfox-swagger2', version: springfoxSwagger
     }
-    if (project.hasProperty('generate') || !project.hasProperty('dev')) {
+    if (project.hasProperty('generate') || project.hasProperty('prod')) {
         task generateServer {
             doLast {
                 println "********** Swagger generate Server **************"
@@ -90,9 +90,10 @@ project(serviceServer) {
                     into file(dirName)
                 }
                 exec {
-                    println "********** NPM Version **************"
+                    println "********** NPM build-prod **************"
                     workingDir "${rootDir}/frontend/api"
-                    commandLine 'npm.cmd', 'run', 'build'
+                    commandLine 'npm.cmd', 'install'
+                    commandLine 'npm.cmd', 'run', 'build-prod'
                 }
             }
         }
