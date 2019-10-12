@@ -1,6 +1,5 @@
 let path = require('path');
 let ExtractTextPlugin = require("extract-text-webpack-plugin");
-let HtmlWebpackPlugin = require("html-webpack-plugin");
 
 let conf = {
     entry: './src/index.js',

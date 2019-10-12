@@ -11,6 +11,13 @@ Description text
 * Build and run `gradle clean build -Pdev && gradle bootRun`
 ##### Run codegen
 * Swagger codegenerate server and client: `gradle clean build -Pgenerate`
+
+##### CROS
+     @CrossOrigin(origins = "http://localhost:3001", maxAge = 3600)
+     @Controller
+     public class UserApiController implements SkillApi { ... }
+
+
 ##H2
 * Url: `http://localhost:8080/h2-console/`
 * JDBC URL: `jdbc:h2:mem:testdb`
@@ -23,5 +30,9 @@ Description text
 * Please download programm "Postman"
 
 
-##### Swagger
-http://localhost:8080/swagger-ui.html#/
+## Swagger
+    http://localhost:8080/swagger-ui.html#/
+
+
+## For versting
+    https://loading.io/css/

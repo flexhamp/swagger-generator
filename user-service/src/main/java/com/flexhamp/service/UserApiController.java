@@ -1,9 +1,5 @@
 package com.flexhamp.service;
 
-//import com.flexhamp.service.api.UserApi;
-//import com.flexhamp.service.model.ListUserResponse;
-//import com.flexhamp.service.model.UserCreateRequest;
-//import com.flexhamp.service.model.UserResponse;
 import com.flexhamp.service.api.SkillApi;
 import com.flexhamp.service.model.Skill;
 import com.flexhamp.service.service.TestService;
