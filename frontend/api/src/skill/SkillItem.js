@@ -1,5 +1,6 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import PropTypes from 'prop-types';
+import Context from '../context'
 
 const styles = {
     li: {
@@ -16,20 +17,31 @@ const styles = {
     }
 };
 
-export function SkillItem({skill}) {
+export function SkillItem({skill, onChange}) {
+    const {removeSkill} = useContext(Context)
+    const classes = [];
+
+    if (skill.progress === skill.study) {
+        classes.push('done')
+    }
     return (
         <li style={styles.li}>
-            <span>
-                <input type="checkbox" style={styles.input}/>
-                <strong>{skill.id}</strong>&nbsp;{skill.name}&nbsp;{skill.study}&nbsp;{skill['pogress']}
+            <span className={classes.join(' ')}>
+                <input type="checkbox"
+                       style={styles.input}
+                       onChange={() => onChange(skill.id)}
+                       checked={skill.progress === skill.study}
+                />
+                <strong>{skill.id}</strong>&nbsp;{skill.name}&nbsp;{skill.study}&nbsp;{skill.progress}
             </span>
-            <button className='rm'>&times;</button>
+            <button className='rm' onClick={removeSkill.bind(null, skill.id)}>&times;</button>
         </li>
     );
 }
 
 SkillItem.propTypes = {
-    skill: PropTypes.object.isRequired
+    skill: PropTypes.object.isRequired,
+    onChange: PropTypes.func.isRequired
 };
 
 export default SkillItem

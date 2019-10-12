@@ -14,14 +14,15 @@ export function SkillsList(props) {
     return (
         <ul style={styles.ul}>
             {props.skills.map(skill => {
-                return <SkillItem skill={skill} key={skill.id}/>
+                return <SkillItem skill={skill} key={skill.id} onChange={props.onToggle}/>
             })}
         </ul>
     );
 }
 
 SkillsList.propTypes = {
-    skills: PropTypes.arrayOf(PropTypes.object).isRequired
+    skills: PropTypes.arrayOf(PropTypes.object).isRequired,
+    onToggle: PropTypes.func.isRequired
 };
 
 export default SkillsList
