@@ -4,6 +4,9 @@
 var SwaggerApi = require('codegen-skills-api');
 var api = new SwaggerApi.SkillApi();
 
+//Import css
+import 'bootstrap/dist/css/bootstrap.min.css'
+import './css/style.css'
 
 // ------  Пример -----------------------------
 var callBackArr = function(error, data, response){
