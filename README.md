@@ -3,13 +3,13 @@
 Description text
 
 ## Build
-###### For prodaction
+#### For prodaction
 *  `gradle clean build -Pprod` or `gradle clean build`
-###### For develop
-######### If codegen exist
+#### For develop
+##### If codegen exist
 * Build partial `gradle clean build -Pdev`
-* Build and run ` gradle clean build -Pdev && gradle bootRun`
-######### Run codegen
+* Build and run `gradle clean build -Pdev && gradle bootRun`
+##### Run codegen
 * Swagger codegenerate server and client: `gradle clean build -Pgenerate`
 ##H2
 * Url: `http://localhost:8080/h2-console/`

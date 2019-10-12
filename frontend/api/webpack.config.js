@@ -1,5 +1,6 @@
 let path = require('path');
 let ExtractTextPlugin = require("extract-text-webpack-plugin");
+let HtmlWebpackPlugin = require("html-webpack-plugin");
 
 let conf = {
     entry: './src/index.js',
@@ -9,7 +10,8 @@ let conf = {
         publicPath: 'dist/'
     },
     devServer: {
-        overlay: true
+        overlay: true,
+        port: 3001
     },
     module: {
         rules: [

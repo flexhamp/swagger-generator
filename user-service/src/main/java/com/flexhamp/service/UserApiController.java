@@ -20,6 +20,7 @@ import javax.validation.Valid;
 import java.util.List;
 import java.util.Map;
 
+@CrossOrigin(origins = "http://localhost:3001", maxAge = 3600)
 @Controller
 public class UserApiController implements SkillApi {
     @Autowired

@@ -21,7 +21,6 @@ function useInputValue(defaultValue = '') {
     }
 }
 
-
 function AddSkill({onCreate}) {
     const input = useInputValue('');
     function submitHendler(event) {
