@@ -8,7 +8,7 @@ Description text
 #### For develop
 ##### If codegen exist
 * Build partial `gradle clean build -Pdev`
-* Build and run `gradle clean build -Pdev && gradle bootRun`
+* Build and run `gradle clean build -Pdev && gradle bootRun -Pdev`
 ##### Run codegen
 * Swagger codegenerate server and client: `gradle clean build -Pgenerate`
 

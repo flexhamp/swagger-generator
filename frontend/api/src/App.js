@@ -8,29 +8,30 @@ import Loader from "./Loader";
 
 import Context from './context'
 
+var SwaggerApi = require('codegen-skills-api');
+var api = new SwaggerApi.SkillApi();
+
 function App() {
-    // const [skills, setSkills] = React.useState([
-    //     {id: 1, name: "Java", study: 1600, progress: 523},
-    //     {id: 2, name: "Kotlin", study: 900, progress: 157},
-    //     {id: 3, name: "Groovy", study: 530, progress: 256},
-    //     {id: 4, name: "Jenkins", study: 600, progress: 200}]
-    // );
     const [skills, setSkills] = React.useState([]);
     const [loading, setLoaging] = React.useState(true);
 
+    const callBackArr = (error, data, response) => {
+        if (error) {
+            setLoaging(false);
+            // console.log('ERROR: ' + error);
+        } else {
+            setSkills(data);
+            setLoaging(false);
+            console.log(response)
+            console.table(data)
+        }
+    };
+
     useEffect(() => {
-        fetch('http://localhost:8080/skill')
-            .then(response => response.json())
-            .then(skills => {
-                setTimeout(() => {
-                    setSkills(skills)
-                    setLoaging(false)
-                }, 2000)
-                // setSkills(skills)
-            });
+        api.getSkills(callBackArr);
     }, []);
 
-    function toggleSkill(id) {
+    const toggleSkill = (id) => {
         setSkills(skills.map(skill => {
                 if (skill.id === id) {
                     skill.progress = skill.study
@@ -38,20 +39,22 @@ function App() {
                 return skill
             })
         );
-    }
+    };
 
-    function removeSkill(id) {
-        setSkills(skills.filter(skill => skill.id !== id))
-    }
+    const removeSkill = (id) => {
+        api.deleteSkill(id, callBackArr);
+    };
 
-    function addSkill(name) {
-        setSkills(skills.concat([{
-            id: skills.length + 1,
-            name,
-            study: 1600,
-            progress: 523
-        }]))
-    }
+    const addSkill = (name) => {
+        var skill = {
+            'skill': new SwaggerApi.Skill.constructFromObject({
+                name,
+                "study": "530",
+                "progress": "263.5"
+            })
+        };
+        api.createSkill(skill, callBackArr);
+    };
 
     return (
         <Context.Provider value={{removeSkill}}>

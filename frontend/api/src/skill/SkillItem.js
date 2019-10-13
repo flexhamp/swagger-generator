@@ -18,7 +18,8 @@ const styles = {
 };
 
 export function SkillItem({skill, onChange}) {
-    const {removeSkill} = useContext(Context)
+    const {removeSkill} = useContext(Context);
+    // console.table(skill)
     const classes = [];
 
     if (skill.progress === skill.study) {
