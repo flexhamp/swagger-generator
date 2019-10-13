@@ -1,6 +1,4 @@
 import React, {useEffect, useState} from 'react';
-import Loader from "./Loader";
-import Context from './context'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import './css/style.css'
 
@@ -16,6 +14,7 @@ var api = new SwaggerApi.SkillApi();
 function About(props) {
     const [loading, setLoaging] = React.useState(true);
     const skillId = props.match.params.id;
+    const [value, setValue] = useState({});
     const callBack = (error, data, response) => {
         if (error) {
             setLoaging(false);
@@ -24,26 +23,20 @@ function About(props) {
             setLoaging(false);
         }
     };
-    //Пример перенаправления после .... setRedirect(true)
+
     const [redirect, setRedirect] = useState(false);
     useEffect(() => {
         api.getSkillById(skillId, callBack);
     }, []);
-    const defaultValue = {
-        id: '',
-        name: '',
-        study: '',
-        progress: ''
-    };
-    const [value, setValue] = useState(defaultValue);
 
     if (redirect) {
         return <Redirect to='/'/>
     }
 
     const updateSkill = (skill) => {
-      console.table(skill);
-        api.updateSkill({'skill': new SwaggerApi.Skill.constructFromObject(skill)}, (err, data, resp) => {});
+        console.table(skill);
+        api.updateSkill({'skill': new SwaggerApi.Skill.constructFromObject(skill)}, (err, data, resp) => {
+        });
         setRedirect(true)
     };
 
@@ -55,53 +48,36 @@ function About(props) {
         }
     }
 
-    function useInputValue(defaultValue = '', name) {
+    function useInputValue(name) {
         return {
             bind: {
                 name,
                 value: value[name],
                 onChange: event => {
+                    console.log(value);
                     var copy = Object.assign({}, value);
-                    copy[name] = event.target.value;
+                    copy[name] = event.target.value
+                    console.log(copy)
                     setValue(copy)
                 }
             },
             value: () => value
         }
     }
-    name: useInputValue('', "name");
+
+    const name = useInputValue("name");
+    const study = useInputValue("study");
+    const progress = useInputValue("progress");
 
     return (
         <form onSubmit={submitHendler}>
             <input type="hidden" defaultValue={value.id || ''}/>
-            <input defaultValue={value.name || ''} onChange={event => {
-                    console.log(value);
-                    var copy = Object.assign({}, value);
-                    copy.name = event.target.value
-                    console.log(copy)
-                    setValue(copy)
-                }
-            }/>
-            <input defaultValue={value.study || ''} onChange={event => {
-                                console.log(event.target.value);
-                                var copy = Object.assign({}, value);
-                                console.log(copy)
-                                copy.study = event.target.value
-                                console.log(copy)
-                                setValue(copy)
-                            }
-                        }/>
-                         <input defaultValue={value.progress || ''} onChange={event => {
-                                                        console.log(event.target.value);
-                                                        var copy = Object.assign({}, value);
-                                                        console.log(copy)
-                                                        copy.progress = event.target.value
-                                                        console.log(copy)
-                                                        setValue(copy)
-                                                    }
-                                                }/>
+            <input defaultValue={value.name || ''} {...name.bind}/>
+            <input defaultValue={value.study || ''} {...study.bind}/>
+            <input defaultValue={value.progress || ''} {...progress.bind}/>
             <button type="submit">Add Skill</button>
         </form>
     );
 }
+
 export default About
