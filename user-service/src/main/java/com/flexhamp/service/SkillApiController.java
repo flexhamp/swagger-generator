@@ -2,11 +2,9 @@ package com.flexhamp.service;
 
 import com.flexhamp.service.api.SkillApi;
 import com.flexhamp.service.model.Skill;
-import com.flexhamp.service.service.TestService;
+import com.flexhamp.service.service.SkillService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.jdbc.core.ResultSetExtractor;
-import org.springframework.jdbc.core.RowMapperResultSetExtractor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -14,13 +12,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 import javax.validation.Valid;
 import java.util.List;
-import java.util.Map;
 
 @CrossOrigin(origins = "http://localhost:3001", maxAge = 3600)
 @Controller
-public class UserApiController implements SkillApi {
+public class SkillApiController implements SkillApi {
     @Autowired
-    TestService service;
+    SkillService service;
 
     @Override
     public ResponseEntity<List<Skill>> createSkill(@Valid @RequestBody Skill skill) {
