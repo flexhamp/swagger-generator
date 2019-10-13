@@ -45,15 +45,8 @@ function App() {
         api.deleteSkill(id, callBackArr);
     };
 
-    const addSkill = (name, study, progress) => {
-        var skill = {
-            'skill': new SwaggerApi.Skill.constructFromObject({
-                name,
-                study,
-                progress
-            })
-        };
-        api.createSkill(skill, callBackArr);
+    const addSkill = (skill) => {
+        api.createSkill({'skill': new SwaggerApi.Skill.constructFromObject(skill)}, callBackArr);
     };
 
     return (
