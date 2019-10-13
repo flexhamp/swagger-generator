@@ -1,8 +1,9 @@
 buildscript {
     repositories {
-        maven { url "http://sbtnexus.ca.sbrf.ru:8081/nexus/content/repositories/central" }
-        maven { url "http://sbtnexus.ca.sbrf.ru:8081/nexus/service/local/repositories/jcenter/content/" }
-        maven { url "http://sbtnexus.ca.sbrf.ru:8081/nexus/service/local/repositories/central/content/" }
+        mavenCentral()
+//        maven { url "http://sbtnexus.ca.sbrf.ru:8081/nexus/content/repositories/central" }
+//        maven { url "http://sbtnexus.ca.sbrf.ru:8081/nexus/service/local/repositories/jcenter/content/" }
+//        maven { url "http://sbtnexus.ca.sbrf.ru:8081/nexus/service/local/repositories/central/content/" }
     }
     dependencies {
         classpath group: 'io.swagger', name: 'swagger-codegen', version: swaggerCodegen
@@ -16,9 +17,10 @@ import io.swagger.codegen.config.CodegenConfigurator
 
 subprojects {
     repositories {
-        maven { url "http://sbtnexus.ca.sbrf.ru:8081/nexus/content/repositories/central" }
-        maven { url "http://sbtnexus.ca.sbrf.ru:8081/nexus/service/local/repositories/jcenter/content/" }
-        maven { url "http://sbtnexus.ca.sbrf.ru:8081/nexus/service/local/repositories/central/content/" }
+        mavenCentral()
+//        maven { url "http://sbtnexus.ca.sbrf.ru:8081/nexus/content/repositories/central" }
+//        maven { url "http://sbtnexus.ca.sbrf.ru:8081/nexus/service/local/repositories/jcenter/content/" }
+//        maven { url "http://sbtnexus.ca.sbrf.ru:8081/nexus/service/local/repositories/central/content/" }
     }
 
     apply plugin: 'java'

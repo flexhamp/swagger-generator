@@ -15,7 +15,7 @@ import {HashRouter as Router, Route, Switch} from "react-router-dom";
 ReactDOM.render(
     <Router>
         <Route exact path="/" component={App}/>
-        <Route path="/about" component={About}/>
+        <Route path="/about/:id" component={About}/>
         <Route path="/update" component={SkillUpdate}/>
     </Router>,
     document.getElementById('root')

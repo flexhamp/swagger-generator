@@ -1,8 +1,9 @@
 buildscript {
     repositories {
-        maven { url "http://sbtnexus.ca.sbrf.ru:8081/nexus/content/repositories/central" }
-        maven { url "http://sbtnexus.ca.sbrf.ru:8081/nexus/service/local/repositories/jcenter/content/" }
-        maven { url "http://sbtnexus.ca.sbrf.ru:8081/nexus/service/local/repositories/central/content/" }
+        mavenCentral()
+//        maven { url "http://sbtnexus.ca.sbrf.ru:8081/nexus/content/repositories/central" }
+//        maven { url "http://sbtnexus.ca.sbrf.ru:8081/nexus/service/local/repositories/jcenter/content/" }
+//        maven { url "http://sbtnexus.ca.sbrf.ru:8081/nexus/service/local/repositories/central/content/" }
     }
     dependencies {
         classpath group: 'org.springframework.boot', name: 'spring-boot-gradle-plugin', version: springBootVersion

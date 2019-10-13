@@ -1,5 +1,6 @@
-import React, {useState} from 'react';
+import React, {useState, useContext} from 'react';
 import PropTypes from 'prop-types';
+import Context from '../context'
 
 function SkillUpdate(skill) {
     // const [value, setValue] = useState(skill);

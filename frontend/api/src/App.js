@@ -5,7 +5,6 @@ import './css/style.css'
 import SkillsList from './skill/SkillsList'
 import AddSkill from "./skill/AddSkill";
 import Loader from "./Loader";
-
 import Context from './context'
 
 var SwaggerApi = require('codegen-skills-api');
@@ -50,15 +49,8 @@ function App() {
 
     const addSkill = (skill) => {
         api.createSkill({'skill': new SwaggerApi.Skill.constructFromObject(skill)}, callBackArr);
-        setRedirect(true)
+//        setRedirect(true)
     };
-
-    //Пример перенаправления после .... setRedirect(true)
-    const [redirect, setRedirect] = useState(false);
-    if (redirect) {
-        return <Redirect to='/about'/>
-    }
-
 
     return (
         <Context.Provider value={{removeSkill}}>
@@ -70,8 +62,6 @@ function App() {
                     loading ? null : <p>No Skills Found</p>
                 )}
             </div>
-            {setTimeout({}, 200)}
-
         </Context.Provider>
 
     );

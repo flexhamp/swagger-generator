@@ -42,7 +42,6 @@ function AddSkill({onCreate}) {
         if (value.name.trim()) {
             onCreate(value);
             setValue(defaultValue);
-            input.map(v => v.value())
          }
     }
 
