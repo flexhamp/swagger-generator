@@ -10,8 +10,7 @@
     "build-dev": "webpack --mode development",
     "build-prod": "webpack --mode production"
   },
-  "author": "",
-  "license": "ISC",
+  "author": "Nikita Kuzmenko",
   "devDependencies": {
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.4",
@@ -32,6 +31,7 @@
   },
   "dependencies": {
     "bootstrap": "^4.3.1",
-    "jquery": "^3.4.1"
+    "jquery": "^3.4.1",
+    "react-bootstrap": "^1.0.0-beta.10"
   }
 }

@@ -36,6 +36,8 @@ export function SkillItem({skill, onChange}) {
             </span>
             <button className='rm' onClick={removeSkill.bind(null, skill.id)}>&times;</button>
         </li>
+
+
     );
 }
 
