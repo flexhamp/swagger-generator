@@ -10,7 +10,8 @@ let conf = {
     },
     devServer: {
         overlay: true,
-        port: 3001
+        port: 3001,
+        historyApiFallback: true
     },
     module: {
         rules: [

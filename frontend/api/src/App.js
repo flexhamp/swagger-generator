@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css'
 import './css/style.css'
 
@@ -10,6 +10,9 @@ import Context from './context'
 
 var SwaggerApi = require('codegen-skills-api');
 var api = new SwaggerApi.SkillApi();
+
+import {Redirect} from "react-router-dom";
+import About from "./About";
 
 function App() {
     const [skills, setSkills] = React.useState([]);
@@ -47,7 +50,15 @@ function App() {
 
     const addSkill = (skill) => {
         api.createSkill({'skill': new SwaggerApi.Skill.constructFromObject(skill)}, callBackArr);
+        setRedirect(true)
     };
+
+    //Пример перенаправления после .... setRedirect(true)
+    const [redirect, setRedirect] = useState(false);
+    if (redirect) {
+        return <Redirect to='/about'/>
+    }
+
 
     return (
         <Context.Provider value={{removeSkill}}>
@@ -59,7 +70,10 @@ function App() {
                     loading ? null : <p>No Skills Found</p>
                 )}
             </div>
+            {setTimeout({}, 200)}
+
         </Context.Provider>
+
     );
 }
 
