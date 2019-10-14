@@ -33,7 +33,7 @@ export function SkillItem({skill, onChange}) {
                        onChange={() => onChange(skill.id)}
                        checked={skill.progress === skill.study}
                 />
-                <Link to={`/update/${skill.id}`}>
+                <Link to={`/skill/${skill.id}`}>
                     <strong>{skill.name}</strong>&nbsp;
                     <span className="badge badge-primary">{skill.study} ч</span>&nbsp;
                     <span className="badge badge-success">{skill.progress} ч</span>

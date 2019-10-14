@@ -3,6 +3,8 @@ package com.flexhamp.service;
 import com.flexhamp.service.api.SkillApi;
 import com.flexhamp.service.model.Skill;
 import com.flexhamp.service.service.SkillService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -19,9 +21,11 @@ public class SkillApiController implements SkillApi {
     @Autowired
     SkillService service;
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(SkillApiController.class);
+
     @Override
     public ResponseEntity<List<Skill>> createSkill(@Valid @RequestBody Skill skill) {
-        System.out.println(skill);
+        LOGGER.debug("Create Sill {}", skill);
         service.create(skill);
         return ResponseEntity.ok(service.findAll());
     }
@@ -44,7 +48,7 @@ public class SkillApiController implements SkillApi {
 
     @Override
     public ResponseEntity<List<Skill>> updateSkill(@Valid @RequestBody Skill skill) {
-        System.out.println(skill.toString());
+        LOGGER.debug("Update Sill {}", skill);
         service.update(skill);
         return ResponseEntity.ok(service.findAll());
     }

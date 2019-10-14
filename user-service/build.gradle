@@ -1,9 +1,6 @@
 buildscript {
     repositories {
         mavenCentral()
-//        maven { url "http://sbtnexus.ca.sbrf.ru:8081/nexus/content/repositories/central" }
-//        maven { url "http://sbtnexus.ca.sbrf.ru:8081/nexus/service/local/repositories/jcenter/content/" }
-//        maven { url "http://sbtnexus.ca.sbrf.ru:8081/nexus/service/local/repositories/central/content/" }
     }
     dependencies {
         classpath group: 'org.springframework.boot', name: 'spring-boot-gradle-plugin', version: springBootVersion
@@ -27,7 +24,8 @@ dependencies {
     compile group: 'io.springfox', name: 'springfox-swagger-ui', version: springfoxSwagger
     compile project(':service-server')
 
-    testCompile group: 'org.mock-server', name: 'mockserver-netty', version: '5.5.4'
+    compile group: 'org.slf4j', name: 'slf4j-api', version: '1.7.25'
+    compile group: 'ch.qos.logback', name: 'logback-classic', version: '1.2.3'
 }
 
 if(project.hasProperty('dev')) {

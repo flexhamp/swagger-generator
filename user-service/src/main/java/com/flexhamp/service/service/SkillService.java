@@ -1,7 +1,10 @@
 package com.flexhamp.service.service;
 
+import com.flexhamp.service.SkillApiController;
 import com.flexhamp.service.model.Skill;
 import com.flexhamp.service.repository.SkillRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.jdbc.core.RowMapperResultSetExtractor;
 import org.springframework.stereotype.Service;
@@ -13,6 +16,7 @@ import java.util.Objects;
 
 @Service
 public class SkillService implements SkillRepository {
+    private static final Logger LOGGER = LoggerFactory.getLogger(SkillService.class);
     private static final String URL = "jdbc:h2:mem:testdb";
     private static final String USER = "sa";
     private static final String PASSWORD = "";
@@ -51,14 +55,11 @@ public class SkillService implements SkillRepository {
     public void update(Skill skill) {
         Long id = skill.getId();
         String name = skill.getName();
-        Double study = skill.getStudy() != null ? skill.getStudy() : 0.0;
-        Double progress = skill.getProgress() != null ? skill.getProgress() : 0.0;
-
-
-        System.out.println("SKILL FOR UPDATE: " + id + " " + name + " " + study + " " + progress);
-
+        double study = skill.getStudy() != null ? skill.getStudy() : 0.0;
+        double progress = skill.getProgress() != null ? skill.getProgress() : 0.0;
+        LOGGER.debug("SKILL FOR UPDATE: " + id + " " + name + " " + study + " " + progress);
         String query = "UPDATE " + SKILL_DB + " SET NAME='" + name + "', STUDY=" + study + ", PROGRESS=" + progress + " WHERE ID=" + id;
-        System.out.println("QUERY: " + query);
+        LOGGER.info("QUERY: " + query);
         execute(query);
     }
 
@@ -76,7 +77,7 @@ public class SkillService implements SkillRepository {
             ResultSet resultSet = statement.executeQuery(query);
             skills.addAll(Objects.requireNonNull(entitySkillRowMapper.extractData(resultSet)));
         } catch (SQLException ignored) {
-            System.out.println(ignored.getMessage());
+            LOGGER.error("findAll {}", ignored.getMessage());
         }
         return skills;
     }
