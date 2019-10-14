@@ -2,6 +2,7 @@ import React from 'react';
 import {HashRouter as Router, Route, Link} from "react-router-dom";
 import App from "./App";
 import About from "./About";
+import SkillUpdate from "./skill/SkillUpdate";
 
 function Navbar() {
     return (
@@ -22,6 +23,7 @@ function Navbar() {
                 <Router>
                     <Route path="/" exact component={App} />
                     <Route path="/about" component={About} />
+                    <Route path="/update/:id" component={SkillUpdate} />
                 </Router>
             </div>
         </div>

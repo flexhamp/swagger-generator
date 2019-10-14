@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import SkillItem from './SkillItem';
+import {HashRouter as Router, Route, Link} from "react-router-dom";
 
 const styles = {
     ul: {
@@ -14,7 +15,7 @@ export function SkillsList(props) {
     return (
         <ul style={styles.ul}>
             {props.skills.map(skill => {
-                return <SkillItem skill={skill} key={skill.id} onChange={props.onToggle}/>
+                return  <SkillItem skill={skill} key={skill.id} onChange={props.onToggle}/>
             })}
         </ul>
     );

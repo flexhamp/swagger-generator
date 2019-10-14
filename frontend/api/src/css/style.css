@@ -75,3 +75,19 @@
         transform: translate(19px, 0);
     }
 }
+
+.badge {
+    font-size: 100% !important;
+    margin-left: 5rem;
+}
+.itemSkill {
+    font-size: 110%;
+}
+
+.list-group-item {
+    margin-bottom: 5px !important;
+}
+
+.formA {
+    margin-bottom: 1rem;
+}

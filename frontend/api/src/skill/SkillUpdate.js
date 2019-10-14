@@ -3,6 +3,7 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import '../css/style.css'
 
 import {Redirect} from "react-router-dom";
+import Context from "../App";
 
 var SwaggerApi = require('codegen-skills-api');
 var api = new SwaggerApi.SkillApi();
@@ -38,7 +39,6 @@ function SkillUpdate(props) {
 
     function submitHendler(event) {
         event.preventDefault();
-        console.log(value)
         if (value.name.trim()) {
             updateSkill(value);
         }
@@ -50,10 +50,8 @@ function SkillUpdate(props) {
                 name,
                 value: value[name],
                 onChange: event => {
-                    console.log(value);
                     var copy = Object.assign({}, value);
                     copy[name] = event.target.value
-                    console.log(copy)
                     setValue(copy)
                 }
             },
@@ -66,13 +64,27 @@ function SkillUpdate(props) {
     const progress = useInputValue("progress");
 
     return (
-        <form onSubmit={submitHendler}>
-            <input type="hidden" defaultValue={value.id || ''}/>
-            <input defaultValue={value.name || ''} {...name.bind}/>
-            <input defaultValue={value.study || ''} {...study.bind}/>
-            <input defaultValue={value.progress || ''} {...progress.bind}/>
-            <button type="submit">Add Skill</button>
-        </form>
+        <div className="wrapper">
+            <h2 className="text-center">Edit Skill</h2>
+            <form className="formA" onSubmit={submitHendler}>
+                <input type="hidden" defaultValue={value.id || ''}/>
+                <div className="form-row">
+                    <div className="form-group col-md-6">
+                        <label>Skill</label>
+                        <input className="form-control" defaultValue={value.name || ''} {...name.bind}/>
+                    </div>
+                    <div className="form-group col-md-3">
+                        <label>Study</label>
+                        <input type="number" className="form-control" defaultValue={value.study || ''} {...study.bind}/>
+                    </div>
+                    <div className="form-group col-md-3">
+                        <label>Progress</label>
+                        <input type="number" className="form-control" defaultValue={value.progress || ''} {...progress.bind}/>
+                    </div>
+                </div>
+                <button type="submit" className="btn btn-primary">Update Skill</button>
+            </form>
+        </div>
     );
 }
 

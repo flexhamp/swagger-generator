@@ -1,6 +1,7 @@
 import React, {useContext} from 'react';
 import PropTypes from 'prop-types';
 import Context from '../context'
+import {Link} from "react-router-dom";
 
 const styles = {
     li: {
@@ -32,8 +33,13 @@ export function SkillItem({skill, onChange}) {
                        onChange={() => onChange(skill.id)}
                        checked={skill.progress === skill.study}
                 />
-                <strong>{skill.id}</strong>&nbsp;{skill.name}&nbsp;{skill.study}&nbsp;{skill.progress}
+                <Link to={`/update/${skill.id}`}>
+                    <strong>{skill.name}</strong>&nbsp;
+                    <span className="badge badge-primary">{skill.study} ч</span>&nbsp;
+                    <span className="badge badge-success">{skill.progress} ч</span>
+                </Link>
             </span>
+
             <button className='rm' onClick={removeSkill.bind(null, skill.id)}>&times;</button>
         </li>
 

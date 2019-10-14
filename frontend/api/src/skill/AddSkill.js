@@ -1,12 +1,6 @@
 import React, {useState} from 'react';
 import PropTypes from 'prop-types';
 
-const styles = {
-    form: {
-        marginBottom: '1rem'
-    }
-};
-
 function AddSkill({onCreate}) {
     const defaultValue = {
         id: '',
@@ -42,16 +36,26 @@ function AddSkill({onCreate}) {
         if (value.name.trim()) {
             onCreate(value);
             setValue(defaultValue);
-         }
+        }
     }
 
     return (
-        <form style={styles.form} onSubmit={submitHendler}>
-            <input type="hidden" value={value.id}/>
-            <input {...input.name.bind}/>
-            <input {...input.study.bind}/>
-            <input {...input.progress.bind}/>
-            <button type="submit">Add Skill</button>
+        <form className="formA" onSubmit={submitHendler}>
+            <div className="form-row">
+                <div className="form-group col-md-6">
+                    <label>Skill</label>
+                    <input className="form-control" {...input.name.bind}/>
+                </div>
+                <div className="form-group col-md-3">
+                    <label>Study</label>
+                    <input type="number" className="form-control"{...input.study.bind}/>
+                </div>
+                <div className="form-group col-md-3">
+                    <label>Progress</label>
+                    <input type="number" className="form-control" {...input.progress.bind}/>
+                </div>
+            </div>
+            <button type="submit" className="btn btn-primary">Add Skill</button>
         </form>
     );
 }

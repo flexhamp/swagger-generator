@@ -50,7 +50,7 @@ function App() {
     return (
         <Context.Provider value={{removeSkill}}>
             <div className="wrapper">
-                <h1>Skills List</h1>
+                <h2 className="text-center">Skills List</h2>
                 <AddSkill onCreate={addSkill}/>
                 {loading && <Loader/>}
                 {skills.length ? (<SkillsList skills={skills} onToggle={toggleSkill}/>) : (
